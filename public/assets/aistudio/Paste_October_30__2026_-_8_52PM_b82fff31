@@ -1,0 +1,1563 @@
+# MASTER PROMPT GOOGLE AI STUDIO
+# VERA — VOICE-ENABLED ELECTRONIC MEDICAL RECORD
+
+## 1. ROLE AND PROJECT IDENTITY
+
+Act as a multidisciplinary senior development team consisting of:
+
+1. Senior Full-Stack Software Engineer.
+2. Healthcare Application Architect.
+3. Health Informatics and Electronic Medical Record Specialist.
+4. Clinical Nursing Informatics Specialist.
+5. Medical Doctor and Clinical Workflow Consultant.
+6. UI/UX Designer specializing in Hospital Information Systems.
+7. Database Engineer and Cybersecurity Specialist.
+8. AI and Voice Recognition Engineer.
+
+Your task is to design and build a professional, functional, modern, secure, responsive, and scalable healthcare web application called:
+
+**VERA: Voice-Enabled Electronic Medical Record**
+
+Full research title:
+
+**"VERA: Pengembangan Rekam Medis Elektronik Berbasis Voice Recognition untuk Mengurangi Screen-Driven Distraction dan Mengoptimalkan Kualitas Komunikasi Terapeutik di Puskesmas."**
+
+The application will be implemented for an Indonesian Puskesmas with inpatient services (Puskesmas Rawat Inap).
+
+VERA must not be developed merely as a static dashboard or UI prototype. Build a functional web application with interconnected modules, working navigation, forms, voice recognition interfaces, database integration, barcode scanning, patient tracking, and clinical workflow simulation.
+
+The primary objectives are:
+
+- Reduce screen-driven distraction during clinical encounters.
+- Enable doctors and nurses to document patient assessments using voice recognition.
+- Improve therapeutic communication between healthcare professionals and patients.
+- Improve patient identification accuracy through barcode wristbands.
+- Monitor inpatient bed availability and patient clinical severity.
+- Digitize medication administration and laboratory specimen workflows through closed-loop processes.
+- Integrate patient medical records, prescriptions, laboratory results, and dietary information.
+
+The primary design perspectives are **DOCTOR and PATIENT**, supported by nurses and other healthcare professionals as operational users.
+
+All interfaces must use professional Indonesian healthcare terminology while retaining the English module names specified below.
+
+---
+
+## 2. APPLICATION ARCHITECTURE
+
+Build VERA as a responsive full-stack web application.
+
+Preferred technology stack:
+
+- Frontend: React + TypeScript.
+- UI: Tailwind CSS with a professional component system.
+- Backend: Secure server-side API.
+- Database: Firebase Firestore or another supported persistent database.
+- Authentication: Firebase Authentication or secure role-based authentication.
+- AI integration: Gemini API through a server-side integration.
+- Voice recognition: Speech-to-text service with a replaceable provider adapter.
+- Barcode scanning: Mobile camera integration using a reliable barcode/QR decoding library.
+- Deployment: Compatible with Google AI Studio's application environment and Vercel.
+
+Technical requirements:
+
+1. Use a modular architecture.
+2. Separate frontend, backend, database, and AI services.
+3. Store API keys exclusively in server-side environment variables.
+4. Never expose Gemini API keys in frontend code.
+5. Use reusable components.
+6. Implement appropriate loading, error, empty, and success states.
+7. Implement data validation.
+8. Create realistic demo data for demonstration.
+9. Use persistent storage where configured.
+10. If a production database or API credential is unavailable, implement an explicit DEMO MODE using simulated data and service adapters. Do not pretend simulated transactions are real clinical transactions.
+
+Make the web application responsive for:
+- Desktop computers used by doctors and administrators.
+- Tablets used by healthcare professionals.
+- Dedicated Android smartphones used for barcode scanning and bedside documentation.
+
+Create an installable PWA when supported.
+
+---
+
+## 3. VISUAL DESIGN AND BRAND IDENTITY
+
+Create a premium healthcare information system interface.
+
+Design characteristics:
+
+- Modern clinical dashboard.
+- Professional medical-grade UI.
+- Minimalist but information-rich.
+- Clear typography.
+- High readability.
+- Intuitive navigation.
+- Low cognitive load.
+- Minimal unnecessary screen interaction.
+- Responsive layout.
+
+Color palette:
+
+- Primary: Navy Blue (#123B63).
+- Secondary: Medical Blue (#2563EB).
+- Accent: Teal (#0D9488).
+- Background: Light Gray (#F3F6FA).
+- Surface: White (#FFFFFF).
+- Text: Dark Navy (#172B4D).
+- Critical: Dark Burgundy (#7F1D1D).
+- Severe: Red (#DC2626).
+- Moderate: Yellow (#FACC15).
+- Stable: Green (#16A34A).
+
+Use a consistent icon system, intuitive illustrations, and informative status badges.
+
+The VERA logo should communicate:
+- Healthcare.
+- Digital medical records.
+- Voice recognition.
+- Patient-centered care.
+
+Use the application name VERA in the sidebar and login page.
+
+Avoid excessive decorative graphics. Clinical information must remain the main visual priority.
+
+---
+
+## 4. USER MANAGEMENT AND ROLE-BASED ACCESS CONTROL
+
+Implement a role-based access control (RBAC) system.
+
+Required user roles:
+
+**A. Doctor**
+- View assigned patients.
+- Access Doctor Assessment.
+- Create and verify CPPT entries.
+- Create medication prescriptions.
+- Request laboratory examinations.
+- Review laboratory results.
+- Review patient medical history.
+
+**B. Nurse**
+- View assigned inpatient beds.
+- Access Nurse Assessment.
+- Record clinical observations.
+- Create nursing progress notes.
+- Scan patient wristbands.
+- Scan medication e-tickets.
+- Scan laboratory specimen labels.
+- Record interventions and medication administration.
+
+**C. Pharmacist**
+- Review electronic prescriptions.
+- Verify medication orders.
+- Prepare medication e-tickets.
+- Record dispensing status.
+
+**D. Laboratory Staff**
+- Receive laboratory examination requests.
+- Generate specimen barcode labels.
+- Record specimen collection and receipt.
+- Input and validate laboratory results.
+
+**E. Medical Records Administrator**
+- Manage patient registration.
+- Manage inpatient admissions and discharges.
+- Manage room and bed configurations.
+- Manage medical records.
+- Monitor data quality.
+
+**F. System Administrator**
+- Manage users and access permissions.
+- Configure application settings.
+- Review audit logs.
+- Manage database configurations.
+
+**G. Patient**
+- Access an authenticated patient-facing interface.
+- View personal care information where authorized.
+- Review medication schedules and dietary information.
+- View approved patient education materials.
+- View selected medical information according to applicable access policies.
+
+Users must only access features and patient records permitted by their assigned roles.
+
+---
+
+# 5. MAIN APPLICATION NAVIGATION
+
+Create a persistent left sidebar with the following navigation:
+
+1. Overview Dashboard
+2. Inpatient Bed Dashboard
+3. EMR Ward
+4. Patient Management
+5. Voice Documentation
+6. Barcode Scanner
+7. Medication Management
+8. Laboratory Management
+9. Nutrition & Dietary Management
+10. Medical Records
+11. Reports & Analytics
+12. User Management
+13. System Settings
+
+Create a top navigation bar containing:
+
+- VERA logo.
+- Current page title.
+- Search patient field.
+- Notification center.
+- Network connection status.
+- Current date and time.
+- Logged-in user's profile.
+- Logout function.
+
+---
+
+# 6. OVERVIEW DASHBOARD
+
+Build an interactive overview dashboard.
+
+Display important operational indicators:
+
+- Total inpatient beds.
+- Occupied beds.
+- Available beds.
+- Occupancy percentage.
+- Total registered inpatient patients.
+- Patients requiring critical attention.
+- Pending medication administrations.
+- Pending laboratory specimens.
+- Unreviewed laboratory results.
+- Pending clinical documentation.
+
+Use interactive cards and data visualizations.
+
+Include:
+
+- Inpatient occupancy chart.
+- Patient acuity distribution.
+- Medication administration status.
+- Laboratory workflow status.
+- Recent clinical activities.
+- Notifications requiring attention.
+
+All dashboard values must be connected to the underlying application data.
+
+Do not use randomly changing statistics.
+
+---
+
+# 7. INPATIENT BED DASHBOARD (EMR WARD)
+
+This is one of the most important modules of VERA.
+
+Create a visual inpatient bed management dashboard using a grid of individual rectangular bed tiles.
+
+Each tile represents one physical inpatient bed.
+
+Example:
+
+Room A:
+- Bed A01
+- Bed A02
+- Bed A03
+- Bed A04
+
+Room B:
+- Bed B01
+- Bed B02
+- Bed B03
+- Bed B04
+
+Create configurable room and bed capacity.
+
+## A. Bed Occupancy Indicators
+
+Use the following mandatory color system:
+
+**BLUE — VACANT BED**
+
+Color: #2563EB
+
+Meaning:
+- The bed is available.
+- No active inpatient encounter is assigned.
+- The bed can be selected for a new admission.
+
+**BLACK — OCCUPIED BED**
+
+Color: #111827
+
+Meaning:
+- The bed is currently assigned to an admitted patient.
+- Patient information is associated with the bed.
+- Clinical information can be accessed according to authorization.
+
+**GRAY — TEMPORARILY UNAVAILABLE**
+
+Optional status for beds under maintenance or cleaning, which must not be counted as available for immediate admission.
+
+## B. Patient Clinical Severity Indicators
+
+For occupied beds, add a distinct colored severity indicator using a vertical colored strip or prominent clinical severity badge.
+
+Do not replace the black occupied-bed background with severity colors.
+
+Use these severity levels:
+
+| Color | Meaning |
+|---|---|
+| Dark Burgundy (#7F1D1D) | Very severe / Critical / Palliative |
+| Red (#DC2626) | Severe |
+| Yellow (#FACC15) | Moderate |
+| Green (#16A34A) | Stable / Controlled |
+
+Clinical severity must be assigned or confirmed by an authorized healthcare professional. Do not automatically diagnose patients based on this color system.
+
+## C. Information Inside Each Bed Tile
+
+Every occupied bed must display:
+
+- Room number.
+- Bed number.
+- Patient initials or authorized display name.
+- Medical record number in appropriately protected form.
+- Age.
+- Gender, if clinically relevant.
+- Admission date.
+- Primary diagnosis.
+- Clinical severity.
+- Responsible doctor.
+- Assigned nurse.
+
+Use emojis or icons to communicate clinical conditions and outstanding interventions.
+
+Examples:
+
+- ⚠️ Fall Risk.
+- 🩹 Pressure Injury Risk.
+- 💊 Medication Pending.
+- 🧪 Laboratory Pending.
+- 🍽️ Special Diet.
+- 💉 IV Therapy.
+- 🫁 Oxygen Therapy.
+- 🩸 Bleeding Risk.
+- 🧠 Altered Consciousness.
+- 🔒 Isolation Precautions.
+- 🚨 Critical Attention Required.
+- 🩺 Pending Assessment.
+
+Each symbol must have a tooltip and accessible text label.
+
+Only display relevant warnings based on patient assessment and active intervention records.
+
+## D. Interactive Bed Functions
+
+When users click an occupied bed, open a detailed patient information panel.
+
+The panel must provide:
+
+- Patient profile.
+- Clinical assessment.
+- Diagnosis.
+- Vital signs.
+- Medication schedule.
+- Laboratory requests.
+- Laboratory results.
+- Nursing interventions.
+- Dietary orders.
+- Fall risk.
+- Other active clinical alerts.
+- Recent CPPT documentation.
+
+When users click a vacant bed, provide an admission or bed-assignment workflow.
+
+## E. Bed Occupancy Calculation
+
+Occupancy must be calculated using active admission, bed assignment, transfer, discharge, and bed maintenance records.
+
+Do not determine that a room is vacant simply because its barcode has not been scanned.
+
+Display:
+- Total beds.
+- Occupied beds.
+- Available beds.
+- Unavailable beds.
+- Occupancy rate.
+
+Update the dashboard whenever a valid admission, transfer, or discharge transaction occurs.
+
+---
+
+# 8. EMR WARD — MAIN CLINICAL DOCUMENTATION MODULE
+
+Create a comprehensive EMR Ward interface.
+
+When users select a patient, show an integrated patient chart with the following tabs:
+
+1. Patient Summary.
+2. Doctor Assessment.
+3. Nurse Assessment.
+4. CPPT.
+5. Order Entry.
+6. Laboratory Results.
+7. Medication Administration.
+8. Medical History.
+9. Resume Medis.
+10. Assessment & Screening.
+11. Intervention History.
+
+Every tab must work and share the same patient and active inpatient encounter context.
+
+## A. DOCTOR ASSESSMENT
+
+Create a structured physician assessment form.
+
+Include:
+
+1. Chief Complaint.
+2. History of Present Illness.
+3. Past Medical History.
+4. Medication History.
+5. Allergy History.
+6. Family History, where relevant.
+7. Physical Examination.
+8. Vital Signs:
+   - Blood Pressure.
+   - Heart Rate.
+   - Respiratory Rate.
+   - Temperature.
+   - Oxygen Saturation.
+   - Pain Score.
+9. Clinical Findings.
+10. Working Diagnosis.
+11. Supporting Diagnostic Findings.
+12. Medical Treatment Plan.
+13. Follow-up Plan.
+14. Responsible Physician.
+15. Date and Time.
+
+Provide:
+
+- Structured manual entry.
+- Voice dictation.
+- Auto-generated draft from verified transcription.
+- Manual correction.
+- Save draft.
+- Verify and sign.
+- Assessment history.
+
+Provide an editable diagnosis field and configurable clinical coding reference.
+
+Never generate an actual diagnosis independently from incomplete patient information.
+
+## B. NURSE ASSESSMENT
+
+Create a structured nursing assessment form.
+
+Include:
+
+**1. Initial Nursing Assessment**
+- General condition.
+- Level of consciousness.
+- Vital signs.
+- Pain assessment.
+- Respiratory assessment.
+- Cardiovascular assessment.
+- Neurological assessment.
+- Gastrointestinal assessment.
+- Genitourinary assessment.
+- Mobility.
+- Nutritional assessment.
+- Skin condition.
+- Elimination.
+- Psychosocial assessment.
+
+**2. Nursing Risk Assessment**
+
+Include:
+
+- Fall Risk Assessment.
+- Pressure Injury Risk Assessment.
+- Nutritional Risk Assessment.
+- Infection Risk.
+- Bleeding Risk.
+- Other configurable screening instruments.
+
+**3. Nursing Care Plan**
+
+Include configurable structured documentation for:
+
+- Nursing Problems.
+- Nursing Outcomes.
+- Nursing Interventions.
+- Evaluation.
+
+Support Indonesian nursing standards such as SDKI, SLKI, and SIKI when the corresponding reference data have been configured.
+
+**4. Voice-Based Nursing Documentation**
+
+Provide voice dictation for:
+- Assessment findings.
+- Nursing diagnoses entered by the nurse.
+- Interventions.
+- Patient responses.
+- Evaluation.
+
+Convert the voice input into structured fields and require verification before saving.
+
+## C. CPPT — INTEGRATED PATIENT PROGRESS NOTES
+
+Create a chronological integrated patient progress note.
+
+Use a structured SOAP-based format:
+
+- S: Subjective.
+- O: Objective.
+- A: Assessment.
+- P: Plan.
+
+Every entry must include:
+
+- Date.
+- Time.
+- Patient.
+- Encounter.
+- Author.
+- Professional role.
+- Clinical note.
+- Verification status.
+- Signature status.
+
+Doctors and nurses must be able to document within the same chronological patient record.
+
+Implement:
+
+- Add new CPPT entry.
+- Voice dictation.
+- Manual editing before signing.
+- Verification.
+- Electronic signing.
+- Chronological history.
+- Search and filtering.
+
+Never allow a signed clinical record to be silently overwritten. Corrections must create an attributable amendment with an audit trail.
+
+## D. ORDER ENTRY
+
+Create an integrated order entry module with two primary sections.
+
+### D1. E-PRESCRIPTION
+
+Allow doctors to create electronic medication prescriptions.
+
+Fields:
+
+- Medication name.
+- Medication code.
+- Strength.
+- Dosage.
+- Route.
+- Frequency.
+- Duration.
+- Quantity.
+- Administration schedule.
+- Special instructions.
+- Responsible physician.
+- Order date and time.
+
+Include:
+
+- Medication list.
+- Allergy checking against the documented allergy record.
+- Prescription verification.
+- Pharmacy processing status.
+- Medication e-ticket generation.
+- Administration tracking.
+
+Use a clinically configurable medication catalog.
+
+### D2. LABORATORY ORDER AND RESULTS
+
+Allow doctors to request laboratory examinations.
+
+Fields:
+
+- Test name.
+- Examination category.
+- Clinical indication.
+- Specimen type.
+- Priority.
+- Ordering physician.
+- Order date and time.
+
+The laboratory module must support:
+
+- Order received.
+- Specimen label generated.
+- Specimen collection.
+- Specimen transportation.
+- Laboratory receipt.
+- Examination processing.
+- Result entry.
+- Result verification.
+- Result release.
+- Critical result notification.
+
+Laboratory results must be linked to the correct patient and active encounter.
+
+Display laboratory results in a structured table with reference ranges configured by the facility, units, timestamps, and abnormal flags where appropriate.
+
+Do not fabricate laboratory values or reference ranges.
+
+---
+
+# 9. PATIENT MEDICAL RECORDS
+
+Create a comprehensive longitudinal and inpatient medical record module.
+
+Include:
+
+1. Patient Demographics.
+2. Medical Record Number.
+3. Admission History.
+4. Medical History.
+5. Surgical History.
+6. Family History.
+7. Allergy Records.
+8. Diagnosis History.
+9. Medication History.
+10. Doctor Assessment.
+11. Nurse Assessment.
+12. CPPT History.
+13. Laboratory History.
+14. Medical Procedures.
+15. Nursing Interventions.
+16. Resume Medis.
+17. Discharge Summary.
+18. Nutrition History.
+19. Patient Education.
+20. Other Clinical Documentation.
+
+Additionally, provide dedicated modules for:
+
+**A. MRSA**
+
+Create a configurable MRSA screening and status record. Where MRSA refers to Methicillin-resistant Staphylococcus aureus, include documented screening status, specimen/result information, date, and isolation or infection-control notes as applicable.
+
+Do not automatically declare a patient MRSA-positive without documented clinical or laboratory evidence.
+
+**B. MNA (Mini Nutritional Assessment)**
+
+Create a structured nutritional screening form.
+
+Include the relevant validated assessment items and scoring rules.
+
+Display:
+- Assessment date.
+- Nutritional screening result.
+- Score, when validly calculated.
+- Nutritional risk category.
+- Assessment by.
+- Recommended follow-up.
+
+Do not invent scoring rules.
+
+**C. RESUME MEDIS**
+
+Provide a structured medical summary containing:
+
+- Admission diagnosis.
+- Final diagnosis.
+- Clinical course.
+- Major interventions.
+- Medication history.
+- Laboratory findings.
+- Patient condition at discharge.
+- Discharge instructions.
+- Follow-up recommendations.
+
+---
+
+# 10. VOICE RECOGNITION ENGINE — THE CORE FEATURE OF VERA
+
+This is the most important innovation of the application.
+
+Develop a dedicated voice recognition module to reduce screen-driven distraction during bedside clinical encounters.
+
+The voice interface must be simple, responsive, and usable on desktop, tablet, and Android smartphones.
+
+## A. Voice Interaction Interface
+
+Create a prominent microphone button with three states:
+
+1. IDLE — Ready to record.
+2. RECORDING — Microphone active.
+3. PROCESSING — Speech being converted into text.
+
+Use a clear visual recording indicator.
+
+Provide:
+
+- Start Recording.
+- Stop Recording.
+- Pause Recording.
+- Speech-to-Text Preview.
+- Edit Transcription.
+- Structure Clinical Notes.
+- Verify.
+- Save.
+
+Do not use continuous ambient recording by default. Recording must be deliberately activated by the healthcare professional, with appropriate patient consent and a visible recording indicator.
+
+## B. Language Recognition
+
+Support Indonesian as the primary language.
+
+Design the voice architecture to accommodate:
+
+- Bahasa Indonesia.
+- Common Indonesian regional expressions.
+- Medical terminology in English.
+- Clinical abbreviations.
+- Numbers and measurement units.
+- Mixed-language clinical expressions.
+
+Create a configurable medical vocabulary dictionary.
+
+## C. Voice-to-Structured-EMR Workflow
+
+Implement the following sequence:
+
+1. Doctor or nurse activates the microphone.
+2. User speaks clinical findings or interventions.
+3. Speech recognition converts audio into text.
+4. Gemini or another configured AI service helps organize the text into structured clinical fields.
+5. The system displays the transcription and proposed structured fields.
+6. Healthcare professional reviews and corrects the content.
+7. User explicitly verifies the information.
+8. User saves or signs the record.
+
+Important safety rules:
+
+- Never save AI-generated clinical content without human verification.
+- Never invent symptoms, diagnoses, medication doses, laboratory values, or vital signs.
+- Preserve negation, measurements, units, and clinical meaning.
+- Highlight uncertain or poorly recognized expressions.
+- Missing information must remain marked as missing rather than being fabricated.
+- Voice-generated prescriptions must always undergo physician review and authorization.
+- Do not allow AI to independently authorize a clinical decision.
+
+The original audio should be temporarily processed and deleted after verification according to the configured data retention policy. Do not retain voice recordings indefinitely by default.
+
+## D. Screen-Driven Distraction Reduction
+
+Optimize the interface so doctors and nurses can document without continuously looking at the screen.
+
+Implement:
+
+- Large microphone control.
+- Minimal navigation.
+- Voice-based field selection where feasible.
+- Hands-free dictation.
+- Short confirmation interactions.
+- Clearly visible recording and verification states.
+- Patient-centered workflow.
+
+The purpose is not to replace therapeutic communication but to preserve eye contact, active listening, and attention toward patients.
+
+## E. Fallback Mechanism
+
+Provide manual documentation whenever:
+
+- Microphone access is denied.
+- Internet is unavailable.
+- Speech recognition fails.
+- Medical vocabulary is not recognized.
+- The AI service is unavailable.
+
+If offline mode is implemented, clearly distinguish locally saved, unsynchronized drafts from records successfully synchronized to the server.
+
+---
+
+# 11. PATIENT BARCODE WRISTBAND SYSTEM
+
+Develop an integrated patient identification system using a dedicated Android smartphone as the scanning device.
+
+Every admitted patient must receive a wristband containing a unique barcode or QR code.
+
+The barcode must contain an opaque patient identifier or secure token, not directly readable personal medical information.
+
+## A. Patient Wristband Generation
+
+Generate printable patient wristband labels.
+
+Include:
+
+- Patient name or approved display name.
+- Medical Record Number.
+- Unique Patient ID.
+- Barcode / QR Code.
+- Admission ID.
+- Facility identification.
+
+The system must associate each barcode with the correct patient and active inpatient encounter.
+
+## B. Mobile Barcode Scanner
+
+Create a dedicated scanner page optimized for Android phones.
+
+Features:
+
+- Rear camera access.
+- Barcode and QR recognition.
+- Camera permission handling.
+- Flashlight support where available.
+- Scan confirmation.
+- Manual code entry fallback.
+- Patient identity verification.
+- Scan history.
+
+After scanning, display:
+
+- Verified patient identity.
+- Active encounter.
+- Room and bed.
+- Relevant clinical warnings.
+- Medication status.
+- Pending interventions.
+- Active laboratory orders.
+- Dietary information.
+
+If the scanned barcode does not match the selected patient, show a prominent warning and block the associated clinical transaction.
+
+---
+
+# 12. CLOSED-LOOP MEDICATION ADMINISTRATION
+
+Develop an integrated closed-loop medication administration workflow.
+
+The principal purpose is to ensure that medication is given to the correct patient and that each administration is digitally recorded.
+
+Use the dedicated Android smartphone scanner.
+
+## A. Medication Workflow
+
+Implement the following sequence:
+
+**STEP 1 — Medication Order**
+
+Doctor creates an authorized e-prescription.
+
+**STEP 2 — Pharmacy Verification**
+
+Pharmacist reviews and processes the prescription.
+
+**STEP 3 — E-Ticket Generation**
+
+The system generates a unique medication e-ticket with a barcode or QR code.
+
+**STEP 4 — Bedside Patient Identification**
+
+Nurse scans the patient's wristband.
+
+The system verifies:
+- Patient identity.
+- Active inpatient encounter.
+- Current bed assignment.
+
+**STEP 5 — Medication Identification**
+
+Nurse scans the medication e-ticket.
+
+The system checks:
+- Correct patient.
+- Correct medication.
+- Correct dose.
+- Correct route.
+- Correct time.
+- Valid prescription.
+- Documented allergies.
+- Administration status.
+
+**STEP 6 — Administration Confirmation**
+
+Before administration, the system displays the medication verification screen.
+
+After the medication is actually administered, the nurse confirms the transaction.
+
+**STEP 7 — Automatic Digital Documentation**
+
+The system records:
+
+- Patient ID.
+- Medication ID.
+- Prescription ID.
+- Nurse ID.
+- Date and time.
+- Administration status.
+- Dose administered.
+- Notes or exceptions.
+- Barcode scan event.
+
+Update the medication administration record and patient EMR automatically.
+
+## B. Safety Conditions
+
+Implement:
+
+- Wrong patient alerts.
+- Wrong medication alerts.
+- Wrong dose alerts.
+- Wrong route alerts.
+- Wrong administration time alerts.
+- Duplicate administration prevention.
+- Allergy alerts.
+- Expired or cancelled order alerts.
+
+Never record a medication as administered simply because the barcode was scanned.
+
+The nurse must explicitly confirm the actual administration.
+
+Provide exception statuses:
+
+- Administered.
+- Not administered.
+- Patient refused.
+- Held.
+- Delayed.
+- Unavailable.
+
+Require an appropriate reason for exceptions.
+
+**Important:** Medical equipment/medical devices (alkes) are excluded from this medication e-ticket scanning workflow, as specified in the project requirements.
+
+---
+
+# 13. CLOSED-LOOP LABORATORY SPECIMEN MANAGEMENT
+
+Build a complete specimen identification and tracking system.
+
+The system must link every laboratory request with the correct patient, active encounter, and specimen label.
+
+## A. Laboratory Specimen Workflow
+
+**STEP 1 — Laboratory Examination Request**
+
+Doctor submits a laboratory examination order.
+
+**STEP 2 — Laboratory Receives Order**
+
+Laboratory personnel review the request.
+
+**STEP 3 — Specimen Label Generation**
+
+Laboratory personnel generate a unique specimen barcode or QR label.
+
+The label must contain a secure reference to:
+
+- Patient ID.
+- Encounter ID.
+- Laboratory Order ID.
+- Specimen ID.
+- Examination type.
+
+**STEP 4 — Specimen Collection at Bedside**
+
+Nurse goes to the patient's room.
+
+**STEP 5 — Scan Patient Wristband**
+
+Nurse scans the patient's wristband.
+
+The system verifies the patient's identity and active encounter.
+
+**STEP 6 — Scan Laboratory Specimen Label**
+
+Nurse scans the specimen label.
+
+The application checks that the patient and specimen label belong to the same order.
+
+If they do not match, block the collection confirmation and show a clear warning.
+
+**STEP 7 — Collection Confirmation**
+
+Nurse confirms specimen collection.
+
+Record:
+
+- Specimen type.
+- Collection date and time.
+- Collecting nurse.
+- Patient verification.
+- Specimen ID.
+
+**STEP 8 — Specimen Transportation**
+
+Track the specimen during transfer to the laboratory.
+
+**STEP 9 — Laboratory Receipt**
+
+Laboratory staff scan or confirm specimen receipt.
+
+**STEP 10 — Laboratory Processing and Results**
+
+Laboratory staff enter and verify laboratory results.
+
+**STEP 11 — Result Integration**
+
+The laboratory result is automatically associated with the patient's EMR and displayed in the Laboratory Results section.
+
+## B. Specimen Status Tracking
+
+Use the following statuses:
+
+- Order Created.
+- Order Received by Laboratory.
+- Label Generated.
+- Awaiting Collection.
+- Patient Verified.
+- Specimen Collected.
+- Awaiting Transportation.
+- In Transit.
+- Received by Laboratory.
+- Processing.
+- Result Available.
+- Result Verified.
+- Result Released.
+
+Every transition must have a timestamp and responsible user.
+
+Create warnings for:
+- Patient and specimen mismatch.
+- Duplicate specimen ID.
+- Missing specimen.
+- Cancelled order.
+- Delayed specimen transportation.
+- Invalid specimen.
+- Critical laboratory findings.
+
+---
+
+# 14. INTEGRATED NUTRITION AND MEAL MANAGEMENT
+
+Create a dietary management module integrated with inpatient medical records.
+
+Doctors and authorized nutrition staff can create dietary orders.
+
+Include:
+
+- Normal diet.
+- Soft diet.
+- Liquid diet.
+- Low-salt diet.
+- Diabetic diet.
+- Renal diet.
+- High-protein diet.
+- Special nutritional requirements.
+- NPO status.
+- Food allergies.
+- Texture modifications.
+- Meal schedules.
+
+The application must integrate:
+
+1. Patient identity.
+2. Room and bed.
+3. Medical dietary order.
+4. Food preparation status.
+5. Meal delivery status.
+6. Meal administration or delivery confirmation.
+7. Dietary notes.
+
+Generate meal e-tickets with barcodes or QR codes where required.
+
+Support barcode verification of the patient and meal ticket before confirming meal delivery.
+
+Display food delivery status in the patient's EMR.
+
+Never allow an expired or conflicting dietary order to appear as a confirmed meal instruction.
+
+---
+
+# 15. INTERVENTION AND PATIENT CARE TRACKING
+
+Build a real-time patient intervention history.
+
+Every clinical intervention must be digitally documented.
+
+Examples:
+
+- Medication administration.
+- Vital sign measurement.
+- Wound care.
+- Infusion.
+- Oxygen administration.
+- Specimen collection.
+- Laboratory examination.
+- Nutritional intervention.
+- Fall prevention.
+- Patient education.
+- Other nursing procedures.
+
+Each intervention must have:
+
+- Patient ID.
+- Encounter ID.
+- Intervention type.
+- Date and time.
+- Responsible healthcare professional.
+- Status.
+- Clinical notes.
+- Verification.
+
+Integrate this information into the patient's CPPT and intervention history.
+
+---
+
+# 16. NOTIFICATION AND CLINICAL ALERT SYSTEM
+
+Develop a centralized notification system.
+
+Examples:
+
+- 🚨 Critical patient condition.
+- ⚠️ Fall risk.
+- 💊 Medication administration overdue.
+- 🧪 Pending laboratory collection.
+- 🔬 Critical laboratory result.
+- 🍽️ Dietary order mismatch.
+- 🩺 Assessment not completed.
+- 📋 CPPT awaiting verification.
+- 🔒 Isolation precaution.
+
+Alert prioritization must be configurable.
+
+Alerts must link directly to the relevant patient record and workflow.
+
+Do not generate automated alerts from fabricated or missing patient measurements.
+
+---
+
+# 17. PATIENT-CENTERED COMMUNICATION INTERFACE
+
+Because VERA aims to improve therapeutic communication, create an interface that supports doctor-patient interaction.
+
+Include a simplified patient-facing view.
+
+Features:
+
+- Patient identification.
+- Current care plan.
+- Upcoming medication schedule.
+- Dietary instructions.
+- Approved laboratory information.
+- Patient education.
+- Questions or concerns.
+- Discharge education.
+
+Provide a doctor-facing patient encounter screen that keeps important patient information visible while voice documentation is active.
+
+The interface must help physicians communicate with patients instead of encouraging continuous screen interaction.
+
+Patient-facing information must only display approved data and must not expose internal staff notes or restricted clinical information.
+
+---
+
+# 18. REPORTS AND ANALYTICS
+
+Build an analytics module for clinical operations and research evaluation.
+
+Display:
+
+**A. Inpatient Indicators**
+- Bed occupancy rate.
+- Average length of stay.
+- Admission count.
+- Discharge count.
+- Patient severity distribution.
+
+**B. Medication Indicators**
+- Total medication orders.
+- Successful administration rate.
+- Missed medication rate.
+- Delayed administration.
+- Medication scanning mismatch events.
+
+**C. Laboratory Indicators**
+- Number of laboratory orders.
+- Specimen collection completion.
+- Specimen transportation time.
+- Result turnaround time.
+- Critical laboratory alerts.
+
+**D. VERA Research Indicators**
+
+Connect this module to the research objectives.
+
+Include:
+
+1. Screen-driven distraction.
+   - Percentage of time looking at the screen.
+   - Documentation time per patient.
+
+2. Therapeutic communication.
+   - Orientation phase.
+   - Working phase.
+   - Termination phase.
+   - Patient perception score.
+
+3. Voice recognition accuracy.
+   - Word Error Rate (WER).
+   - Structured entry accuracy.
+   - Correction frequency.
+   - Completeness of clinical notes.
+
+4. Technology acceptance.
+   - System Usability Scale (SUS).
+   - Performance Expectancy.
+   - Effort Expectancy.
+   - Social Influence.
+   - Facilitating Conditions (UTAUT).
+
+All research indicators must be derived from actual recorded observations, validated questionnaires, and system logs.
+
+Do not invent research findings or automatically claim that VERA has improved communication quality.
+
+---
+
+# 19. DATABASE DESIGN
+
+Create a relational or appropriately structured document database.
+
+At minimum, create collections or tables for:
+
+1. Users.
+2. Roles.
+3. Patients.
+4. MedicalRecords.
+5. InpatientEncounters.
+6. Rooms.
+7. Beds.
+8. BedAssignments.
+9. DoctorAssessments.
+10. NurseAssessments.
+11. ClinicalNotes.
+12. CPPTEntries.
+13. Diagnoses.
+14. Allergies.
+15. MedicalHistories.
+16. VitalSigns.
+17. RiskAssessments.
+18. MNARecords.
+19. MRSARecords.
+20. MedicationCatalog.
+21. MedicationOrders.
+22. MedicationTickets.
+23. MedicationAdministration.
+24. LaboratoryOrders.
+25. SpecimenLabels.
+26. SpecimenTracking.
+27. LaboratoryResults.
+28. DietaryOrders.
+29. MealTickets.
+30. InterventionRecords.
+31. WristbandTokens.
+32. BarcodeScanLogs.
+33. VoiceTranscriptions.
+34. Notifications.
+35. AuditLogs.
+36. ResearchMetrics.
+
+Establish relationships between patients, encounters, beds, clinical documentation, orders, and interventions.
+
+Enforce unique identifiers and appropriate validation.
+
+Use timestamps and responsible user IDs for clinical transactions.
+
+Maintain historical records when patients transfer between beds or departments.
+
+---
+
+# 20. SECURITY, PRIVACY, AND CLINICAL SAFETY
+
+Implement security by design.
+
+Requirements:
+
+- Role-based access control.
+- Secure authentication.
+- Protected clinical API endpoints.
+- Encryption in transit.
+- Secure data storage.
+- Session expiration.
+- Activity logging.
+- Audit trails.
+- Patient consent management.
+- Secure voice processing.
+- Temporary audio retention.
+- Controlled access to patient data.
+- Backup and recovery strategy.
+
+Use the Indonesian medical record regulatory framework, including Permenkes No. 24 Tahun 2022, as a design reference. Production deployment must undergo institutional, legal, clinical, and information-security validation.
+
+Critical conditions:
+
+1. No unauthorized access to medical records.
+2. No silent modification of signed clinical notes.
+3. No automatic medication administration confirmation.
+4. No patient/specimen identity mismatch.
+5. No AI-generated diagnosis without clinician review.
+6. No storing sensitive patient data inside barcode payloads.
+7. No use of real patient data in demonstration mode.
+8. No false claim of regulatory compliance or production readiness.
+
+Create a visible DEMO MODE indicator for simulated environments.
+
+---
+
+# 21. DEMONSTRATION DATA AND SIMULATION
+
+Populate the application with realistic fictional demonstration data.
+
+Create:
+
+- 4 inpatient rooms.
+- 4 beds per room.
+- 16 total inpatient beds.
+- A mixture of occupied and vacant beds.
+- Different patient severity levels.
+- Several active diagnoses.
+- Different fall-risk statuses.
+- Medication orders.
+- Laboratory orders.
+- Laboratory results.
+- Dietary orders.
+- CPPT entries.
+- Nursing interventions.
+
+Use entirely fictional patient identities.
+
+Ensure the demonstration dataset illustrates:
+
+- Vacant beds in blue.
+- Occupied beds in black.
+- Different severity indicators.
+- Palliative/critical patients.
+- Patients with fall risk.
+- Patients awaiting medications.
+- Patients awaiting laboratory examinations.
+- Patients receiving special dietary interventions.
+
+Create demo accounts for doctor, nurse, pharmacist, laboratory staff, medical records administrator, and system administrator.
+
+Provide an interactive demonstration mode for barcode scanning if the device camera is unavailable.
+
+Clearly identify simulated scans and transactions as DEMO MODE.
+
+---
+
+# 22. FUNCTIONAL ACCEPTANCE CRITERIA
+
+Before completing the application, test the following scenarios:
+
+**TEST 1 — Patient Registration**
+
+Create a patient record and generate a unique patient barcode.
+
+**TEST 2 — Inpatient Admission**
+
+Assign the patient to an available bed. Verify that the bed changes from blue to black.
+
+**TEST 3 — Severity Indicator**
+
+Assign a clinician-confirmed severity status. Verify that the bed tile displays the corresponding severity indicator without changing the occupancy color.
+
+**TEST 4 — Doctor Assessment**
+
+Open a patient record and create a complete Doctor Assessment.
+
+**TEST 5 — Nurse Assessment**
+
+Create a Nurse Assessment including vital signs and risk assessment.
+
+**TEST 6 — Voice Documentation**
+
+Speak a clinical note, convert it into text, edit it, verify it, and save the structured entry.
+
+**TEST 7 — CPPT**
+
+Create a CPPT entry and verify that it appears in the patient's chronological clinical history.
+
+**TEST 8 — E-Prescription**
+
+Create an electronic prescription and generate a medication e-ticket.
+
+**TEST 9 — Closed-Loop Medication**
+
+Scan the correct patient wristband, scan the correct medication e-ticket, verify the medication, and confirm administration.
+
+Also test incorrect patient and incorrect medication scenarios. These must be blocked.
+
+**TEST 10 — Laboratory Workflow**
+
+Create a laboratory order, generate a specimen barcode, scan the patient wristband, scan the specimen label, confirm collection, and complete laboratory processing.
+
+**TEST 11 — Laboratory Results**
+
+Enter and verify laboratory results. Confirm that they appear in the correct patient EMR.
+
+**TEST 12 — Dietary Integration**
+
+Create a special dietary order and verify that the meal information appears in the patient's record.
+
+**TEST 13 — Bed Availability**
+
+Discharge a patient and verify that the bed changes to vacant after the discharge and bed-release workflow is completed.
+
+**TEST 14 — Role-Based Access**
+
+Verify that users cannot access unauthorized modules or patient records.
+
+**TEST 15 — Audit Trail**
+
+Verify that clinical transactions are recorded with user identity, timestamp, and action history.
+
+**TEST 16 — Responsive Scanner**
+
+Test the scanner interface using an Android phone camera where available.
+
+---
+
+# 23. DEVELOPMENT EXECUTION INSTRUCTIONS
+
+Do not simply provide a conceptual explanation, static mockup, or design description.
+
+Actually build the application.
+
+Follow this development sequence:
+
+**PHASE 1 — FOUNDATION**
+- Create the project structure.
+- Configure application routing.
+- Establish the design system.
+- Implement authentication.
+- Build the sidebar and dashboard layout.
+
+**PHASE 2 — EMR DEVELOPMENT**
+- Create patient management.
+- Implement Inpatient Bed Dashboard.
+- Build Doctor Assessment.
+- Build Nurse Assessment.
+- Build CPPT.
+- Build Order Entry.
+- Implement patient medical records.
+
+**PHASE 3 — AI AND VOICE DEVELOPMENT**
+- Implement the microphone interface.
+- Integrate the speech-to-text service.
+- Create structured clinical documentation.
+- Implement verification before saving.
+- Implement a fallback manual entry workflow.
+
+**PHASE 4 — BARCODE AND CLOSED-LOOP DEVELOPMENT**
+- Generate patient wristbands.
+- Build Android camera scanning.
+- Create medication e-tickets.
+- Implement closed-loop medication administration.
+- Create laboratory specimen barcodes.
+- Implement closed-loop laboratory workflows.
+- Integrate dietary management.
+
+**PHASE 5 — DATABASE AND SECURITY**
+- Connect the configured database.
+- Implement RBAC.
+- Implement clinical validation.
+- Implement audit trails.
+- Implement data persistence.
+
+**PHASE 6 — TESTING AND REFINEMENT**
+- Run functional tests.
+- Fix runtime errors.
+- Verify all navigation.
+- Test responsive layouts.
+- Test the clinical workflows.
+- Verify that every important button and action works.
+
+---
+
+# 24. FINAL OUTPUT REQUIREMENTS
+
+The completed project must include:
+
+1. A functioning VERA web application.
+2. Complete source code.
+3. Responsive desktop interface.
+4. Responsive Android scanning interface.
+5. Working EMR Ward.
+6. Interactive Inpatient Bed Dashboard.
+7. Voice Recognition interface.
+8. Doctor Assessment.
+9. Nurse Assessment.
+10. CPPT.
+11. Electronic Prescription.
+12. Laboratory Orders and Results.
+13. Patient Barcode Wristband.
+14. Medication E-Ticket.
+15. Laboratory Specimen Barcode.
+16. Closed-Loop Medication Workflow.
+17. Closed-Loop Laboratory Workflow.
+18. Integrated Dietary Management.
+19. Patient Medical Records.
+20. Database structure and configuration.
+21. Demo dataset.
+22. User access controls.
+23. Audit Trail.
+24. Basic user documentation.
+
+Include a README file describing:
+
+- Application architecture.
+- Installation requirements.
+- Environment variables.
+- Database configuration.
+- AI service configuration.
+- Voice recognition setup.
+- Barcode scanner setup.
+- Demo accounts.
+- Deployment instructions.
+- Production readiness limitations.
+
+Ensure the application can be previewed and its major functions can be tested directly in the development environment.
+
+If any third-party integration requires credentials or external infrastructure, implement the corresponding adapter and provide clear setup instructions rather than fabricating a successful connection.
+
+---
+
+# 25. FINAL PRODUCT VISION
+
+VERA must represent a new approach to patient-centered clinical documentation.
+
+It must connect three major dimensions:
+
+**DIMENSION 1 — HUMAN-CENTERED CARE**
+
+Doctors and nurses can devote more attention to the patient, maintain eye contact, listen actively, and communicate therapeutically while documenting clinical information through voice recognition.
+
+**DIMENSION 2 — INTELLIGENT ELECTRONIC MEDICAL RECORD**
+
+All patient assessments, clinical progress notes, prescriptions, laboratory results, and nursing interventions are integrated into one structured medical record.
+
+**DIMENSION 3 — CLOSED-LOOP PATIENT SAFETY**
+
+Barcode-based patient identification connects the patient's wristband with medication administration, laboratory specimens, and dietary services to improve identification accuracy and traceability.
+
+The ultimate objective is to create an integrated system that places the patient at the center of clinical care, minimizes unnecessary screen interaction, improves documentation efficiency, and supports safer inpatient services at Indonesian Puskesmas.
+
+**PROJECT NAME: VERA**
+
+**TAGLINE: "Less Screen. More Connection. Safer Patient Care."**
+
+Now begin building the complete VERA application. Prioritize a working application over a static presentation. Do not omit the essential modules, do not create non-functional buttons, and do not claim that simulated functionality is connected to real hospital infrastructure.

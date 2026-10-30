@@ -1,0 +1,6 @@
+{
+  "name": "VERA: Voice-Enabled Electronic Medical Record",
+  "description": "Pengembangan Rekam Medis Elektronik Berbasis Voice Recognition untuk Mengurangi Screen-Driven Distraction dan Mengoptimalkan Komunikasi Terapeutik di Puskesmas Rawat Inap.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
